@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Text, Button, Input, Select, Flex, Spacer, useToast } from "@chakra-ui/react";
 import { FaSignInAlt, FaUserPlus, FaTruck } from "react-icons/fa";
+import LocationCostMap from "../components/LocationCostMap";
 import { useNavigate } from "react-router-dom";
 
 const API_URL = "https://backengine-93sw.fly.dev";
@@ -376,6 +377,7 @@ const Index = () => {
               <Button onClick={() => handleRating(currentService.id, 5, "Great service!")}>Submit Rating</Button>
             </>
           )}
+          <LocationCostMap />
         </Box>
       )}
     </Box>
