@@ -11,15 +11,15 @@ const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const [guestName, setGuestName] = useState("");
-  const [guestEmail, setGuestEmail] = useState("");
-  const [guestPhone, setGuestPhone] = useState("");
   const [accessToken, setAccessToken] = useState("");
 
   const [serviceType, setServiceType] = useState("");
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const [guestName, setGuestName] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
+  const [guestPhone, setGuestPhone] = useState("");
   const [serviceHistory, setServiceHistory] = useState([]);
   const [currentService, setCurrentService] = useState(null);
 
@@ -105,6 +105,16 @@ const Index = () => {
   };
 
   const handleBooking = async () => {
+    if (!isLoggedIn && (!guestName || !guestEmail || !guestPhone)) {
+      toast({
+        title: "Booking Failed",
+        description: "Please fill in all guest information fields.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     try {
       const response = await fetch(`${API_URL}/services`, {
         method: "POST",
