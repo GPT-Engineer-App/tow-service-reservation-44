@@ -11,7 +11,6 @@ const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const toast = useToast();
-  
 
   const handleLogin = async () => {
     try {
@@ -123,22 +122,22 @@ const Index = () => {
           <Heading size="md" mb={4}>
             Service Tracking
           </Heading>
-          {/* TODO: Implement service tracking */}
+          {}
 
           <Heading size="md" mb={4}>
             Payment
           </Heading>
-          {/* TODO: Implement payment integration */}
+          {}
 
           <Heading size="md" mb={4}>
             Service History
           </Heading>
-          {/* TODO: Implement service history */}
+          {}
 
           <Heading size="md" mb={4}>
             Service Rating
           </Heading>
-          {/* TODO: Implement service rating */}
+          {}
         </Box>
       )}
     </Box>
