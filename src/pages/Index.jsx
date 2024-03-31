@@ -17,11 +17,11 @@ const Index = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const [serviceHistory, setServiceHistory] = useState([]);
+  const [currentService, setCurrentService] = useState(null);
   const [guestName, setGuestName] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
-  const [serviceHistory, setServiceHistory] = useState([]);
-  const [currentService, setCurrentService] = useState(null);
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -312,9 +312,14 @@ const Index = () => {
           <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} mb={4} />
           {!isLoggedIn && (
             <Box>
-              <Input placeholder="Name" value={guestName} onChange={(e) => setGuestName(e.target.value)} mb={4} />
-              <Input placeholder="Email" value={guestEmail} onChange={(e) => setGuestEmail(e.target.value)} mb={4} />
-              <Input placeholder="Phone" value={guestPhone} onChange={(e) => setGuestPhone(e.target.value)} mb={4} />
+              <p>Para realizar un seguimiento de su reserva, inicie sesión o regístrese.</p>
+              <Button onClick={() => setIsLoggedIn(true)}>Iniciar sesión</Button>
+              <Button onClick={() => navigate("/signup")}>Registrarse</Button>
+              <br />
+              <br />
+              <Input placeholder="Nombre" value={guestName} onChange={(e) => setGuestName(e.target.value)} />
+              <Input placeholder="Correo electrónico" value={guestEmail} onChange={(e) => setGuestEmail(e.target.value)} />
+              <Input placeholder="Número de teléfono" value={guestPhone} onChange={(e) => setGuestPhone(e.target.value)} />
             </Box>
           )}
           <Button colorScheme="blue" onClick={handleBooking} mb={8}>
