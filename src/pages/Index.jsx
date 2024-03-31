@@ -292,7 +292,7 @@ const Index = () => {
             <Button leftIcon={<FaSignInAlt />} onClick={handleLogin} mr={4}>
               Login
             </Button>
-            <Button leftIcon={<FaUserPlus />} onClick={handleSignup}>
+            <Button leftIcon={<FaUserPlus />} onClick={() => navigate("/signup")}>
               Signup
             </Button>
           </>
