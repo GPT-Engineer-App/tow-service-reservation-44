@@ -11,10 +11,11 @@ const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const [accessToken, setAccessToken] = useState("");
   const [guestName, setGuestName] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+
   const [serviceType, setServiceType] = useState("");
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -116,10 +117,7 @@ const Index = () => {
           origin_location: origin,
           destination_location: destination,
           date_time: dateTime,
-          client_user_id: userId,
-          guest_name: guestName,
-          guest_email: guestEmail,
-          guest_phone: guestPhone,
+          ...(isLoggedIn ? { client_user_id: userId } : { guest_name: guestName, guest_email: guestEmail, guest_phone: guestPhone }),
         }),
       });
 
@@ -303,11 +301,11 @@ const Index = () => {
           <Input placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} mb={4} />
           <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} mb={4} />
           {!isLoggedIn && (
-            <>
+            <Box>
               <Input placeholder="Name" value={guestName} onChange={(e) => setGuestName(e.target.value)} mb={4} />
               <Input placeholder="Email" value={guestEmail} onChange={(e) => setGuestEmail(e.target.value)} mb={4} />
               <Input placeholder="Phone" value={guestPhone} onChange={(e) => setGuestPhone(e.target.value)} mb={4} />
-            </>
+            </Box>
           )}
           <Button colorScheme="blue" onClick={handleBooking} mb={8}>
             Confirm Booking
