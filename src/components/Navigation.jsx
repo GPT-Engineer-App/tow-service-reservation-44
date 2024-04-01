@@ -13,8 +13,11 @@ const Navigation = () => {
         <Link as={RouterLink} to="/login" mr={4} _hover={{ textDecoration: "none", bg: "blue.500", color: "white" }}>
           Login
         </Link>
-        <Link as={RouterLink} to="/signup">
+        <Link as={RouterLink} to="/signup" mr={4}>
           Signup
+        </Link>
+        <Link as={RouterLink} to="/service-history">
+          Service History
         </Link>
       </Flex>
     </Box>
