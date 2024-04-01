@@ -10,6 +10,7 @@ import ServiceHistory from "./pages/ServiceHistory";
 import ServiceDetails from "./pages/ServiceDetails";
 import Payment from "./pages/Payment";
 import Rating from "./pages/Rating";
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 const colors = {
   brand: {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/service-details/:id" element={<ServiceDetails />} />
           <Route path="/payment/:id" element={<Payment />} />
           <Route path="/rating/:id" element={<Rating />} />
+          <Route path="/booking-confirmation/:id" element={<BookingConfirmation />} />
         </Routes>
       </Router>
     </ChakraProvider>

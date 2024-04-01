@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Box, Heading, Input, Select, Button, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
+
+const API_URL = "https://api.example.com";
 
 const BookingForm = () => {
   const [serviceType, setServiceType] = useState("");
@@ -13,8 +16,37 @@ const BookingForm = () => {
   const [dateTime, setDateTime] = useState("");
   const [distance, setDistance] = useState(0);
 
-  const handleBooking = () => {
-    console.log("Booking submitted");
+  const navigate = useNavigate();
+
+  const handleBooking = async () => {
+    try {
+      const response = await fetch(`${API_URL}/bookings`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          serviceType,
+          name,
+          phone,
+          vehicleMake,
+          vehicleModel,
+          origin,
+          destination,
+          dateTime,
+          distance,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        navigate(`/booking-confirmation/${data.id}`);
+      } else {
+        console.error("Failed to create booking");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleMapData = (data) => {
