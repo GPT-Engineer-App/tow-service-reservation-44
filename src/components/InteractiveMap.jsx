@@ -29,13 +29,22 @@ const InteractiveMap = ({ onMapData }) => {
   };
 
   const calculateDistance = () => {
-    const simulatedDistance = 10;
-    setDistance(simulatedDistance);
+    const [originLat, originLng] = originCoords.split(",").map(parseFloat);
+    const [destLat, destLng] = destinationCoords.split(",").map(parseFloat);
+
+    const R = 6371;
+    const dLat = (destLat - originLat) * (Math.PI / 180);
+    const dLng = (destLng - originLng) * (Math.PI / 180);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(originLat * (Math.PI / 180)) * Math.cos(destLat * (Math.PI / 180)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const calculatedDistance = R * c;
+
+    setDistance(calculatedDistance.toFixed(2));
 
     onMapData({
       origin,
       destination,
-      distance: simulatedDistance,
+      distance: calculatedDistance.toFixed(2),
     });
   };
 

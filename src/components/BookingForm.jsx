@@ -46,8 +46,19 @@ const BookingForm = () => {
   };
 
   const handleBooking = () => {
-    if (!serviceType || !name || !phone || !vehicleMake || !vehicleModel || !origin || !destination || !dateTime) {
-      alert("Please fill in all required fields");
+    const errors = {};
+
+    if (!serviceType) errors.serviceType = "Service type is required";
+    if (!name) errors.name = "Name is required";
+    if (!phone) errors.phone = "Phone number is required";
+    if (!vehicleMake) errors.vehicleMake = "Vehicle make is required";
+    if (!vehicleModel) errors.vehicleModel = "Vehicle model is required";
+    if (!origin) errors.origin = "Origin is required";
+    if (!destination) errors.destination = "Destination is required";
+    if (!dateTime) errors.dateTime = "Date and time are required";
+
+    if (Object.keys(errors).length > 0) {
+      console.log(errors);
       return;
     }
 
