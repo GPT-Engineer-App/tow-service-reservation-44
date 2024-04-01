@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading, Input, Select, Button, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
@@ -18,13 +18,43 @@ const BookingForm = () => {
 
   const navigate = useNavigate();
 
+  const [locationCosts, setLocationCosts] = useState([]);
+
+  useEffect(() => {
+    fetchLocationCosts();
+  }, []);
+
+  const fetchLocationCosts = async () => {
+    try {
+      const response = await fetch(`${API_URL}/location-costs`);
+      if (response.ok) {
+        const data = await response.json();
+        setLocationCosts(data);
+      } else {
+        console.error("Failed to fetch location costs");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const calculateCost = () => {
+    const baseCost = serviceType === "towing" ? 50 : serviceType === "flatbed" ? 75 : 30;
+    const distanceCost = distance * 2;
+    const locationCost = locationCosts.find((cost) => cost.origin === origin && cost.destination === destination)?.cost || 0;
+    return baseCost + distanceCost + locationCost;
+  };
+
   const handleBooking = () => {
     if (!serviceType || !name || !phone || !vehicleMake || !vehicleModel || !origin || !destination || !dateTime) {
       alert("Please fill in all required fields");
       return;
     }
 
-    navigate("/booking-confirmation", {
+    const cost = calculateCost();
+
+    const bookingId = Math.floor(Math.random() * 10000);
+    navigate(`/payment/${bookingId}`, {
       state: {
         serviceType,
         name,
@@ -35,6 +65,7 @@ const BookingForm = () => {
         destination,
         dateTime,
         distance,
+        cost,
       },
     });
   };

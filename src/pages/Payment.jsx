@@ -1,21 +1,22 @@
 import React from "react";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const { id } = useParams();
+  const location = useLocation();
+  const { bookingId, cost } = location.state;
   const navigate = useNavigate();
 
   const handlePayment = () => {
-    // Simulate payment processing
-    navigate(`/rating/${id}`);
+    // Process payment
+    navigate("/thank-you");
   };
 
   return (
     <Box>
       <Heading as="h1">Payment</Heading>
-      <Text>Booking ID: {id}</Text>
-      <Text>Amount: $100</Text>
+      <Text>Booking ID: {bookingId}</Text>
+      <Text>Amount: ${cost}</Text>
       <Button onClick={handlePayment}>Pay Now</Button>
     </Box>
   );
