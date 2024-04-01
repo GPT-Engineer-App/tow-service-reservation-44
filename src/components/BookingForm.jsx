@@ -18,35 +18,25 @@ const BookingForm = () => {
 
   const navigate = useNavigate();
 
-  const handleBooking = async () => {
-    try {
-      const response = await fetch(`${API_URL}/bookings`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          serviceType,
-          name,
-          phone,
-          vehicleMake,
-          vehicleModel,
-          origin,
-          destination,
-          dateTime,
-          distance,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        navigate(`/booking-confirmation/${data.id}`);
-      } else {
-        console.error("Failed to create booking");
-      }
-    } catch (error) {
-      console.error("Error:", error);
+  const handleBooking = () => {
+    if (!serviceType || !name || !phone || !vehicleMake || !vehicleModel || !origin || !destination || !dateTime) {
+      alert("Please fill in all required fields");
+      return;
     }
+
+    navigate("/booking-confirmation", {
+      state: {
+        serviceType,
+        name,
+        phone,
+        vehicleMake,
+        vehicleModel,
+        origin,
+        destination,
+        dateTime,
+        distance,
+      },
+    });
   };
 
   const handleMapData = (data) => {
