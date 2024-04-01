@@ -49,7 +49,7 @@ const Signup = () => {
       <Heading mb={4}>Signup</Heading>
       <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} mb={4} />
       <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} mb={4} />
-      <Button colorScheme="blue" onClick={handleSignup}>
+      <Button colorScheme="teal" _hover={{ transform: "scale(1.05)" }} onClick={handleSignup}>
         Signup
       </Button>
     </Box>

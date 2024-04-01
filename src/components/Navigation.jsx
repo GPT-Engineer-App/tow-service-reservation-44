@@ -10,7 +10,7 @@ const Navigation = () => {
           Tow Truck Service
         </Link>
         <Spacer />
-        <Link as={RouterLink} to="/login" mr={4}>
+        <Link as={RouterLink} to="/login" mr={4} _hover={{ textDecoration: "none", bg: "blue.500", color: "white" }}>
           Login
         </Link>
         <Link as={RouterLink} to="/signup">

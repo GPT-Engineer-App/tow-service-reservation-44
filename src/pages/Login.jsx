@@ -15,7 +15,7 @@ const Login = () => {
         <FormLabel>Password</FormLabel>
         <Input type="password" />
       </FormControl>
-      <Button colorScheme="blue" type="submit">
+      <Button colorScheme="teal" _hover={{ transform: "scale(1.05)" }} type="submit">
         Login
       </Button>
     </Box>

@@ -24,7 +24,7 @@ const BookingForm = () => {
       <Input placeholder="Current Location" value={origin} onChange={(e) => setOrigin(e.target.value)} mb={4} />
       <Input placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} mb={4} />
       <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} mb={4} />
-      <Button colorScheme="blue" onClick={handleBooking}>
+      <Button colorScheme="teal" _hover={{ transform: "scale(1.05)" }} onClick={handleBooking}>
         Confirm Booking
       </Button>
     </Box>
