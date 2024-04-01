@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Input, Select, Button, Text } from "@chakra-ui/react";
+import { Box, Heading, Input, Select, Button, Text, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
 
@@ -46,6 +46,7 @@ const BookingForm = () => {
   };
 
   const handleBooking = () => {
+    const toast = useToast();
     const errors = {};
 
     if (!serviceType) errors.serviceType = "Service type is required";
@@ -57,28 +58,33 @@ const BookingForm = () => {
     if (!destination) errors.destination = "Destination is required";
     if (!dateTime) errors.dateTime = "Date and time are required";
 
-    if (Object.keys(errors).length > 0) {
-      console.log(errors);
-      return;
+    if (Object.keys(errors).length === 0) {
+      const cost = calculateCost();
+      navigate("/booking-confirmation", {
+        state: {
+          serviceType,
+          name,
+          phone,
+          vehicleMake,
+          vehicleModel,
+          origin,
+          destination,
+          dateTime,
+          distance,
+          cost,
+        },
+      });
+    } else {
+      Object.values(errors).forEach((errorMessage) => {
+        toast({
+          title: "Validation Error",
+          description: errorMessage,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
     }
-
-    const cost = calculateCost();
-
-    const bookingId = Math.floor(Math.random() * 10000);
-    navigate(`/payment/${bookingId}`, {
-      state: {
-        serviceType,
-        name,
-        phone,
-        vehicleMake,
-        vehicleModel,
-        origin,
-        destination,
-        dateTime,
-        distance,
-        cost,
-      },
-    });
   };
 
   const handleMapData = (data) => {
