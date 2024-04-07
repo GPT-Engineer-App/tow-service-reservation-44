@@ -7,10 +7,12 @@ const API_URL = "https://backengine-93sw.fly.dev";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
   const toast = useToast();
 
   const handleSignup = async () => {
+    setIsLoading(true); // Set loading state to true
     try {
       const response = await fetch(`${API_URL}/signup`, {
         method: "POST",
@@ -41,6 +43,8 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Set loading state back to false after request completes
     }
   };
 
@@ -49,7 +53,7 @@ const Signup = () => {
       <Heading mb={4}>Signup</Heading>
       <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} mb={4} />
       <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} mb={4} />
-      <Button colorScheme="teal" _hover={{ transform: "scale(1.05)" }} onClick={handleSignup}>
+      <Button colorScheme="teal" _hover={{ transform: "scale(1.05)" }} onClick={handleSignup} isLoading={isLoading}>
         Signup
       </Button>
     </Box>

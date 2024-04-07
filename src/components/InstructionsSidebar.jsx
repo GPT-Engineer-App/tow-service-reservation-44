@@ -1,7 +1,20 @@
-import { Box, List, ListItem, ListIcon, Heading } from "@chakra-ui/react";
+import React from 'react';
+import { Box, List, ListItem, ListIcon, Heading, Input } from "@chakra-ui/react";
 import { FaRegLightbulb } from "react-icons/fa";
 
 const InstructionsSidebar = () => {
+  const [contactInput, setContactInput] = React.useState('');
+
+  const handleInputChange = (event) => {
+    setContactInput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Handle form submission here
+  };
+
   return (
     <Box p={5} border="1px" borderColor="gray.200" borderRadius="md" bg="gray.50">
       <Heading size="md" mb={3}>
@@ -22,9 +35,14 @@ const InstructionsSidebar = () => {
         </ListItem>
         <ListItem>
           <ListIcon as={FaRegLightbulb} color="green.500" />
+          Enter your contact information <Input value={contactInput} onChange={handleInputChange} />
+        </ListItem>
+        <ListItem>
+          <ListIcon as={FaRegLightbulb} color="green.500" />
           Confirm your booking and get instant assistance.
         </ListItem>
       </List>
+      <Button mt={4} onClick={handleSubmit}>Next Step</Button>
     </Box>
   );
 };

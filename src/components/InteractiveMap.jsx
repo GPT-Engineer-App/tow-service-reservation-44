@@ -1,3 +1,4 @@
+// InteractiveMap.js
 import React, { useState } from "react";
 import { Box, Input } from "@chakra-ui/react";
 
@@ -53,13 +54,13 @@ const InteractiveMap = ({ onMapData }) => {
       <h3>Interactive Map</h3>
       <p>Click on the map to select origin and destination or enter coordinates:</p>
       <Input placeholder="Origin Coordinates" value={originCoords} onChange={handleOriginChange} mb={2} />
-      <Input placeholder="Destination Coordinates" value={destinationCoords} onChange={handleDestinationChange} mb={2} />
-      <div id="map" style={{ height: "400px" }} onClick={handleMapClick}></div>
-      <p>Origin: {origin}</p>
-      <p>Destination: {destination}</p>
-      <p>Distance: {distance} km</p>
-    </Box>
-  );
+  <Input placeholder="Destination Coordinates" value={destinationCoords} onChange={handleDestinationChange} mb={2} />
+  <div id="map" style={{ textDecoration: "none", bg: "blue.500", color: "white", height: "400px" }} onClick={handleMapClick}></div>
+  <p>Origin: {origin}</p>
+  <p>Destination: {destination}</p>
+  <p>Distance: {distance} km</p>
+</Box>
+);
 };
 
 export default InteractiveMap;
