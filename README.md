@@ -1,6 +1,5 @@
 # tow-service-reservation
 
-
 Descripción de la aplicación de reserva de servicio de grúa para IA:
 Objetivo:
 

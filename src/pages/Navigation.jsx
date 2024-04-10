@@ -1,6 +1,5 @@
-//navigation.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+//src/pages/Navigation.jsx
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -9,7 +8,8 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,7 +27,7 @@ const Navigation = () => {
           <Link to="/signup">Registrarse</Link>
         </HStack>
         <IconButton
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "block", md: "none" }}
           aria-label="Open menu"
           icon={<HamburgerIcon />}
           onClick={onOpen}
@@ -53,9 +53,9 @@ const Navigation = () => {
           right="4"
           onClick={onClose}
         />
-        <Link to="/">Inicio</Link>
-        <Link to="/login">Iniciar Sesión</Link>
-        <Link to="/signup">Registrarse</Link>
+        <Link to="/" onClick={onClose}>Inicio</Link>
+        <Link to="/login" onClick={onClose}>Iniciar Sesión</Link>
+        <Link to="/signup" onClick={onClose}>Registrarse</Link>
       </Flex>
     </Box>
   );

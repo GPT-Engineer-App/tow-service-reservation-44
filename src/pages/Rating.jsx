@@ -1,3 +1,5 @@
+//src/pages/Rating.jsx
+
 import React, { useState } from "react";
 import { Box, Heading, Text, Button, Input } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
