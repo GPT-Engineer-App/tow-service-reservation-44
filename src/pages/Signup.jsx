@@ -1,3 +1,4 @@
+// Signup.jsx
 import React, { useState } from "react";
 import { Box, Heading, Input, Button, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";

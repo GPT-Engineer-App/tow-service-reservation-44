@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function ThankYouPage() {
   return (
@@ -13,9 +14,11 @@ function ThankYouPage() {
       <Text color={"gray.500"} mb={6}>
         We appreciate your business and will do our best to meet your service expectations.
       </Text>
-      <Button colorScheme="teal" bgGradient="linear(to-r, teal.400, teal.500, teal.600)" color="white" variant="solid">
-        Go to Dashboard
-      </Button>
+      <Link to="/dashboard">
+        <Button colorScheme="teal" bgGradient="linear(to-r, teal.400, teal.500, teal.600)" color="white" variant="solid">
+          Go to Dashboard
+        </Button>
+      </Link>
     </Box>
   );
 }

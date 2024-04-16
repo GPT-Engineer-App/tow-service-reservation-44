@@ -1,3 +1,4 @@
+//src/components/LocationCostMap.jsx
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 

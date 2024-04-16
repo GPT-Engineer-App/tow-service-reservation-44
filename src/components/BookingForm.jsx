@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Box, Heading, Input, Select, Button, Text, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Heading, Select, Button, Text, useToast, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
-
-const API_URL = "https://93sw.database.backengine.dev";
 
 const BookingForm = () => {
   const [serviceType, setServiceType] = useState("");
@@ -11,42 +9,13 @@ const BookingForm = () => {
   const [phone, setPhone] = useState("");
   const [vehicleMake, setVehicleMake] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
   const [dateTime, setDateTime] = useState("");
   const [distance, setDistance] = useState(0);
 
   const navigate = useNavigate();
-
-  const [locationCosts, setLocationCosts] = useState([]);
-
-  useEffect(() => {
-    fetchLocationCosts();
-  }, []);
-
-  const fetchLocationCosts = async () => {
-    try {
-      const response = await fetch(`${API_URL}/location-costs`);
-      if (response.ok) {
-        const data = await response.json();
-        setLocationCosts(data);
-      } else {
-        console.error("Failed to fetch location costs");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const calculateCost = () => {
-    const baseCost = serviceType === "towing" ? 50 : serviceType === "flatbed" ? 75 : 30;
-    const distanceCost = distance * 2;
-    const locationCost = locationCosts.find((cost) => cost.origin === origin && cost.destination === destination)?.cost || 0;
-    return baseCost + distanceCost + locationCost;
-  };
+  const toast = useToast();
 
   const handleBooking = () => {
-    const toast = useToast();
     const errors = {};
 
     if (!serviceType) errors.serviceType = "Service type is required";
@@ -54,12 +23,9 @@ const BookingForm = () => {
     if (!phone) errors.phone = "Phone number is required";
     if (!vehicleMake) errors.vehicleMake = "Vehicle make is required";
     if (!vehicleModel) errors.vehicleModel = "Vehicle model is required";
-    if (!origin) errors.origin = "Origin is required";
-    if (!destination) errors.destination = "Destination is required";
     if (!dateTime) errors.dateTime = "Date and time are required";
 
     if (Object.keys(errors).length === 0) {
-      const cost = calculateCost();
       navigate("/booking-confirmation", {
         state: {
           serviceType,
@@ -67,11 +33,8 @@ const BookingForm = () => {
           phone,
           vehicleMake,
           vehicleModel,
-          origin,
-          destination,
           dateTime,
           distance,
-          cost,
         },
       });
     } else {
@@ -88,8 +51,6 @@ const BookingForm = () => {
   };
 
   const handleMapData = (data) => {
-    setOrigin(data.origin);
-    setDestination(data.destination);
     setDistance(data.distance);
   };
 

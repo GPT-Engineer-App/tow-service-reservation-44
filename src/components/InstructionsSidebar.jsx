@@ -1,5 +1,6 @@
+//src/components/InstructionSidebar.jsx
+import { Box, Button, Heading, Input, List, ListIcon, ListItem } from "@chakra-ui/react";
 import React from 'react';
-import { Box, List, ListItem, ListIcon, Heading, Input } from "@chakra-ui/react";
 import { FaRegLightbulb } from "react-icons/fa";
 
 const InstructionsSidebar = () => {
